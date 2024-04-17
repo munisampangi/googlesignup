@@ -12,13 +12,13 @@ class Login extends Component {
     Cookies.set('JWT_TOKEN', jwtToken, {
       expires: 30,
     })
-    history.replace('/')
+    history.push('/')
   }
 
   submitForm = async event => {
     event.preventDefault()
     const {email, password} = this.state
-    const userDetails = {email, password}
+    const userDetails = {username:email, password}
     const url = 'https://apis.ccbp.in/login'
     const options = {
       method: 'POST',
@@ -40,7 +40,9 @@ class Login extends Component {
     // }/
     else {
       // console.log(this.state.errorMsg)
+       const {history} = this.props
       this.setState({isError: true, errorMsg: 'Invalid Credentials'})
+      history.replace("/login")
     }
   }
 
