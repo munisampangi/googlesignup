@@ -6,6 +6,8 @@ import {IoSettingsOutline} from 'react-icons/io5'
 import {AiOutlineLike} from 'react-icons/ai'
 import {FaBell} from 'react-icons/fa'
 import {CgProfile} from 'react-icons/cg'
+import {Redirect} from 'react-router-dom'
+import Cookies  from "js-cookie"
 
 import {
   ResponsiveContainer,
@@ -74,7 +76,14 @@ const colors = [
   'rgb(149, 192, 245)',
 ]
 
-const Dashboard = () => (
+const Dashboard = () => {
+  const token=Cookies.get("JWT_TOKEN")
+  if (token===undefined){
+    return <Redirect to="/login"/>
+  } 
+  else{
+    return (
+  
   <div className="dashboard-container">
     <nav className="sidebar">
       <div className="board-section">
@@ -218,5 +227,7 @@ const Dashboard = () => (
     </div>
   </div>
 )
+}
+}
 
 export default Dashboard
